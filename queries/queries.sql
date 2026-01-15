@@ -10,7 +10,7 @@ SELECT p.nombre, p.apellido1, p.apellido2
     WHERE p.tipo = 'alumno' AND p.telefono IS NULL;
 
 -- 3. Retorna el llistat dels alumnes que van néixer en 1999. (id, nombre, apellido1, apellido2, fecha_nacimiento)
-SELECT p.id, p.nombre, p.apellido1, p.apellido2
+SELECT p.id, p.nombre, p.apellido1, p.apellido2, p.fecha_nacimiento
     FROM persona p
     WHERE p.tipo = 'alumno' AND YEAR(p.fecha_nacimiento) = 1999;
 
@@ -110,11 +110,9 @@ SELECT p2.apellido1, p2.apellido2, p2.nombre
 -- 15. Retorna un llistat amb tots els departaments que no han impartit assignatures en cap curs escolar. (nombre)
 SELECT DISTINCT d.nombre
     FROM departamento d
-    LEFT JOIN profesor p
-    ON d.id = p.id_departamento
-    LEFT JOIN asignatura a
-    ON p.id_profesor = a.id_profesor
-    WHERE a.id IS NULL;
+    LEFT JOIN ( SELECT DISTINCT p.id_departamento FROM profesor p INNER JOIN asignatura a ON p.id_profesor = a.id_profesor) AS departamento_con_asignatura
+    ON d.id = departamento_con_asignatura.id_departamento
+    WHERE departamento_con_asignatura.id_departamento IS NULL;
 
 -- 16. Retorna el nombre total d'alumnes que hi ha. (total)
 SELECT COUNT(*) AS total
