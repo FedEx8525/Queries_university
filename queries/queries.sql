@@ -133,7 +133,7 @@ SELECT d.nombre AS departamento, COUNT(p.id_profesor) AS total
 -- 19. Retorna un llistat amb tots els departaments i el nombre de professors/es que hi ha en cadascun d'ells. Tingui en compte que poden existir departaments que no tenen professors/es associats. Aquests departaments també han d'aparèixer en el llistat. (departamento, total)
  SELECT d.nombre AS departamento, COUNT(p.id_profesor) AS total
     FROM profesor p
-    JOIN departamento d
+    LEFT JOIN departamento d
     ON p.id_departamento = d.id
     GROUP BY d.nombre
     ORDER BY total DESC;
