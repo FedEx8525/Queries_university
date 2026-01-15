@@ -139,7 +139,7 @@ SELECT d.nombre AS departamento, COUNT(p.id_profesor) AS total
     ORDER BY total DESC;
 
 -- 20. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun. Tingues en compte que poden existir graus que no tenen assignatures associades. Aquests graus també han d'aparèixer en el llistat. El resultat haurà d'estar ordenat de major a menor pel nombre d'assignatures. (grau, total)
-SELECT g.nombre AS grado, COUNT(a.id_grado) AS total
+SELECT g.nombre AS grau, COUNT(a.id_grado) AS total
     FROM asignatura a
     RIGHT JOIN grado g
     ON a.id_grado = g.id
@@ -147,7 +147,7 @@ SELECT g.nombre AS grado, COUNT(a.id_grado) AS total
     ORDER BY total DESC;
 
 -- 21. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun, dels graus que tinguin més de 40 assignatures associades. (grau, total)
-SELECT g.nombre AS grado, COUNT(a.id_grado) AS total
+SELECT g.nombre AS grau, COUNT(a.id_grado) AS total
     FROM asignatura a
     RIGHT JOIN grado g
     ON a.id_grado = g.id
@@ -156,14 +156,14 @@ SELECT g.nombre AS grado, COUNT(a.id_grado) AS total
     ORDER BY total DESC;
 
 -- 22. Retorna un llistat que mostri el nom dels graus i la suma del nombre total de crèdits que hi ha per a cada tipus d'assignatura. El resultat ha de tenir tres columnes: nom del grau, tipus d'assignatura i la suma dels crèdits de totes les assignatures que hi ha d'aquest tipus. (grau, tipus, total_creditos)
-SELECT g.nombre AS grado, a.tipo AS tipos, SUM(a.creditos) AS total_creditos
+SELECT g.nombre AS grau, a.tipo, SUM(a.creditos) AS total_creditos
     FROM grado g
     INNER JOIN asignatura a
     ON g.id = a.id_grado
     GROUP BY g.nombre, a.tipo;
 
 -- 23. Retorna un llistat que mostri quants alumnes s'han matriculat d'alguna assignatura en cadascun dels cursos escolars. El resultat haurà de mostrar dues columnes, una columna amb l'any d'inici del curs escolar i una altra amb el nombre d'alumnes matriculats. (anyo_inicio, total)
-SELECT c_e.anyo_inicio AS año_inicio, COUNT(DISTINCT a_s_m_a.id_alumno) AS total
+SELECT c_e.anyo_inicio, COUNT(DISTINCT a_s_m_a.id_alumno) AS total
     FROM curso_escolar c_e
     INNER JOIN alumno_se_matricula_asignatura a_s_m_a
     ON c_e.id = a_s_m_a.id_curso_escolar
