@@ -136,7 +136,7 @@ SELECT d.nombre AS departamento, COUNT(p.id_profesor) AS total
     RIGHT JOIN departamento d
     ON p.id_departamento = d.id
     GROUP BY d.nombre
-    ORDER BY total DESC;
+    ORDER BY total ASC;
 
 -- 20. Retorna un llistat amb el nom de tots els graus existents en la base de dades i el nombre d'assignatures que té cadascun. Tingues en compte que poden existir graus que no tenen assignatures associades. Aquests graus també han d'aparèixer en el llistat. El resultat haurà d'estar ordenat de major a menor pel nombre d'assignatures. (grau, total)
 SELECT g.nombre AS grau, COUNT(a.id_grado) AS total
